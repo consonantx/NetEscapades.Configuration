@@ -77,9 +77,10 @@ namespace NetEscapades.Configuration.Vault
                     var configInner = JsonConfigurationStringParser.Parse(kvp.Value?.ToString());
                     foreach (var inner in configInner)
                     {
+                        var valuePath = $"{kvp.Key}:{inner.Key}";
                         var key = string.IsNullOrWhiteSpace(pathPrefix)
-                            ? inner.Key
-                            : $"{pathPrefix}:{inner.Key}";
+                            ? valuePath
+                            : $"{pathPrefix}:{valuePath}";
                         
                         data.Add(key, inner.Value);
                     }
